@@ -17,7 +17,9 @@ int main()
 		cout << "2.删除节点" << endl;
 		cout << "3.修改节点" << endl;
 		cout << "4.遍历链表" << endl;
-		cout << "5.退出程序" << endl;
+		cout << "5.反转链表" << endl;
+		cout << "6.查找数据" << endl;
+		cout << "7.退出程序" << endl;
 		cout << "****************************" << endl;
 		cout << "please input your select:" << endl;
 		cin >> num;
@@ -41,7 +43,13 @@ int main()
 			list.UpdateNode(head, mydate, update); 
 				break;
 		case 4:list.Each(head); break;
-		case 5:return 0;
+		case 5:list.Reversla(head); break;
+
+		case 6:
+			cout << "please input find node data:" << endl;
+			cin >> mydate; 
+			list.IndexNode(head, mydate); break;
+		case 7:return 0;
 		default:cout << "please input valid data!!!" << endl; break;
 		}
 	}

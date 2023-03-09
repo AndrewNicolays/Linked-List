@@ -3,28 +3,30 @@
 
 pNode MyList::CreateNode()
 {
-	pNode p = (pNode)malloc(sizeof(Node));
-	p->next = NULL;
-	return p;
+	pNode y = (pNode)malloc(sizeof(Node));
+	y->date = (templat)0;
+	y->next = NULL;
+	return y;
 }
 
 void MyList::InsertNode(pNode head, templat date)
 {
-	pNode p = (pNode)malloc(sizeof(Node));
-	p->date = date;
-	p->next = NULL;
+	pNode w = (pNode)malloc(sizeof(Node));
+	w->date = date;
+	w->next = NULL;
 
 	while (head->next != NULL)
 	{
 		head = head->next;
 	}
-	head->next = p;
+	head->next = w;
 }
 
 void MyList::DeleteNode(pNode head, templat date)
 {
-	if (head->next == NULL)
+	if (IsEmpty(head))
 	{
+		cout << "this is empty linked list!!!";
 		return;
 	}
 
@@ -36,6 +38,7 @@ void MyList::DeleteNode(pNode head, templat date)
 			p = head->next;
 			head->next = p->next;
 			free(p);
+			cout << "delete node date success!!!" << endl;
 			break;
 		}
 		head = head->next;
@@ -65,4 +68,59 @@ void MyList::Each(pNode head)
 		head = head->next;
 	}
 	cout << endl;
+}
+
+void MyList::Reversla(pNode head)
+{
+	if (IsEmpty(head))
+	{
+		cout << "this is empty linked list!!!";
+		return;
+	}
+
+	pNode p = head->next;
+	pNode c = p->next;
+	pNode f = c->next;
+	p->next = NULL;
+	head->next = NULL;
+	while (f != NULL)
+	{
+		c->next = p;
+		p = c;
+		c = f;
+		f = f->next;
+	}
+	c->next = p;
+	head->next = c;
+	
+	Each(head);
+}
+
+void MyList::IndexNode(pNode head, templat date)
+{
+	if (IsEmpty(head))
+	{
+		cout << "this is empty linked list!!!" << endl;
+		return;
+	}
+
+	while (head->next != NULL)
+	{
+		if (head->next->date == date)
+		{
+			cout << "Find node data: " << date << endl;
+			return;
+		}
+		head = head->next;
+	}
+	cout << "Not find node date!!!" << endl;
+	return;
+}
+
+bool MyList::IsEmpty(pNode head)
+{
+	if (head->next == NULL)
+		return true;
+	else
+		return false;
 }
